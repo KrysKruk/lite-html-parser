@@ -1,0 +1,17 @@
+name: nested tags with children
+xhtml: <div><p>Welcome <span>Mr</span> <strong>John</strong></p><hr /></div>
+expected:
+  - opentag: div
+  - opentag: p
+  - text: 'Welcome '
+  - opentag: span
+  - text: Mr
+  - closetag: span
+  - text: ' '
+  - opentag: strong
+  - text: John
+  - closetag: strong
+  - closetag: p
+  - opentag: hr
+  - closetag: ''
+  - closetag: div

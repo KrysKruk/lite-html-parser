@@ -1,0 +1,4 @@
+name: leading lt
+xhtml: '>a>'
+expected:
+  - text: '>a>'

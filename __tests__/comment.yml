@@ -1,0 +1,6 @@
+name: comment
+xhtml: <!--- comment <line> ->---><hr />
+expected:
+  - comment: '- comment <line> ->-'
+  - opentag: hr
+  - closetag: ''

@@ -1,0 +1,8 @@
+name: text around tag
+xhtml: ABC<b>123</b>def
+expected:
+  - text: ABC
+  - opentag: b
+  - text: '123'
+  - closetag: b
+  - text: def

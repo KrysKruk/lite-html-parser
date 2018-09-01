@@ -1,0 +1,8 @@
+name: bindings
+xhtml: <input disabled=${true} value="Hello ${name}!"/>Login ${email} here
+expected:
+  - opentag: input
+  - attribute: [disabled, '${true}']
+  - attribute: [value, 'Hello ${name}!']
+  - closetag: ''
+  - text: Login ${email} here

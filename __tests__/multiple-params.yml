@@ -1,0 +1,10 @@
+name: multiple tag params
+xhtml: <input disabled type=text name=max/ value="!a> b/<!-- <c=d" autofocus/>
+expected:
+  - opentag: input
+  - attribute: [disabled, '${true}']
+  - attribute: [type, text]
+  - attribute: [name, max/]
+  - attribute: [value, '!a> b/<!-- <c=d']
+  - attribute: [autofocus, '${true}']
+  - closetag: ''

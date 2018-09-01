@@ -1,0 +1,7 @@
+name: tag with attributes and text
+xhtml: <p class="abc">Body text</p>
+expected:
+  - opentag: p
+  - attribute: [class, abc]
+  - text: Body text
+  - closetag: p

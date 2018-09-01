@@ -1,0 +1,11 @@
+name: style
+xhtml: <br/><style type="text/css">var ab = 2; <!-- abc --> <style><b></style><hr/>
+expected:
+  - opentag: br
+  - closetag: ''
+  - opentag: style
+  - attribute: [type, text/css]
+  - text: var ab = 2; <!-- abc --> <style><b>
+  - closetag: style
+  - opentag: hr
+  - closetag: ''

@@ -1,0 +1,10 @@
+name: script
+xhtml: <br/><script>var ab = 2; <!-- abc --> <script><b></script><hr/>
+expected:
+  - opentag: br
+  - closetag: ''
+  - opentag: script
+  - text: var ab = 2; <!-- abc --> <script><b>
+  - closetag: script
+  - opentag: hr
+  - closetag: ''

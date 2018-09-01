@@ -1,0 +1,5 @@
+name: self closing tag
+xhtml: <hr/>
+expected:
+  - opentag: hr
+  - closetag: ''

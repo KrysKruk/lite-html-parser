@@ -1,0 +1,6 @@
+name: empty tag name
+xhtml: <>abc</>
+expected:
+  - opentag: ''
+  - text: abc
+  - closetag: ''
