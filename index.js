@@ -135,14 +135,14 @@ exports.parse = (xhtml, { opentag, closetag, attribute, text, comment, instructi
       bitOff(ATTR_DOUBLE_QUOTE)
       bitOff(ATTR_QUOTE)
       bitOff(ATTR_VALUE)
-    } else if (char === '"' && isBitOn(ATTR_VALUE)) {
+    } else if (char === '"' && isBitOn(ATTR_VALUE) && !isBitOn(ATTR_QUOTE)) {
       bitOn(ATTR_DOUBLE_QUOTE)
       bitOn(ATTR_QUOTE)
     } else if (char === "'" && isBitOn(ATTR_SINGLE_QUOTE)) {
       bitOff(ATTR_SINGLE_QUOTE)
       bitOff(ATTR_QUOTE)
       bitOff(ATTR_VALUE)
-    } else if (char === "'" && isBitOn(ATTR_VALUE)) {
+    } else if (char === "'" && isBitOn(ATTR_VALUE) && !isBitOn(ATTR_QUOTE)) {
       bitOn(ATTR_SINGLE_QUOTE)
       bitOn(ATTR_QUOTE)
     } else if (char === '/' && isBitOn(IN_TAG) && !isBitOn(ATTR_VALUE)) {

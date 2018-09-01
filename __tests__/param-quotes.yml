@@ -1,0 +1,7 @@
+name: different param quotes
+xhtml: <div data-name="'Reb'" data-age='"2"' />
+expected:
+  - opentag: div
+  - attribute: [data-name, "'Reb'"]
+  - attribute: [data-age, '"2"']
+  - closetag: ''
