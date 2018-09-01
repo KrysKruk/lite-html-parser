@@ -4,7 +4,13 @@ Covers less than 50% of the XHTML Specification, but is fast and supports 99% ca
 
 See tests for examples.
 
-### Usage
+## Installation
+
+```
+npm i not-so-smart-xhtml-parser
+```
+
+## Usage
 
 ```js
 const { parse } = require('not-so-smart-xhtml-parser')
