@@ -1,6 +1,11 @@
 {
 	"name": "not-so-smart-xhtml-parser",
 	"version": "0.0.1",
+	"license": "MIT",
+	"keywords": ["xhtml", "html", "parser"],
+	"author": "https://github.com/KrysKruk/",
+	"repository": "https://github.com/KrysKruk/not-so-smart-xhtml-parser",
+	"bugs": "https://github.com/KrysKruk/not-so-smart-xhtml-parser/issues",
 	"scripts": {
 		"test": "jest",
 		"lint": "eslint ."
