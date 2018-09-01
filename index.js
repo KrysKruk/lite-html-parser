@@ -170,7 +170,9 @@ exports.parse = (xhtml, { opentag, closetag, attribute, text, comment, instructi
       bitOn(ATTR_VALUE)
       attrRest = rest
       rest = ''
-    } else if (char === ' ' && isBitOn(TAG_CLOSE)) {
+    } else if (char === ' ' && isBitOn(IN_TAG) && !isBitOn(ATTR_VALUE)) {
+      // NOP
+    } else if (char === '\n' && isBitOn(IN_TAG)) {
       // NOP
     } else if (isBitOn(TAG_CLOSE)) {
       tagRest += char
