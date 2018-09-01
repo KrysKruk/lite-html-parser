@@ -2,11 +2,13 @@ const IN_TAG = 1 << 0
 const TAG_OPEN = 1 << 1
 const ATTR_VALUE = 1 << 2
 const TAG_CLOSE = 1 << 3
-const ATTR_QUOTES = 1 << 4
-const IN_INSTRUCTION = 1 << 5
-const IN_COMMENT = 1 << 6
-const IN_SCRIPT = 1 << 7
-const IN_STYLE = 1 << 8
+const ATTR_QUOTE = 1 << 4
+const ATTR_SINGLE_QUOTE = 1 << 5
+const ATTR_DOUBLE_QUOTE = 1 << 6
+const IN_INSTRUCTION = 1 << 7
+const IN_COMMENT = 1 << 8
+const IN_SCRIPT = 1 << 9
+const IN_STYLE = 1 << 10
 
 const SCRIPT_ENDING = ['<', '/', 's', 'c', 'r', 'i', 'p', 't', '>']
 const STYLE_ENDING = ['<', '/', 's', 't', 'y', 'l', 'e', '>']
@@ -129,14 +131,23 @@ exports.parse = (xhtml, { opentag, closetag, attribute, text, comment, instructi
         text(rest, line, row)
         rest = ''
       }
-    } else if (char === '"' && isBitOn(ATTR_QUOTES)) {
-      bitOff(ATTR_QUOTES)
+    } else if (char === '"' && isBitOn(ATTR_DOUBLE_QUOTE)) {
+      bitOff(ATTR_DOUBLE_QUOTE)
+      bitOff(ATTR_QUOTE)
       bitOff(ATTR_VALUE)
     } else if (char === '"' && isBitOn(ATTR_VALUE)) {
-      bitOn(ATTR_QUOTES)
+      bitOn(ATTR_DOUBLE_QUOTE)
+      bitOn(ATTR_QUOTE)
+    } else if (char === "'" && isBitOn(ATTR_SINGLE_QUOTE)) {
+      bitOff(ATTR_SINGLE_QUOTE)
+      bitOff(ATTR_QUOTE)
+      bitOff(ATTR_VALUE)
+    } else if (char === "'" && isBitOn(ATTR_VALUE)) {
+      bitOn(ATTR_SINGLE_QUOTE)
+      bitOn(ATTR_QUOTE)
     } else if (char === '/' && isBitOn(IN_TAG) && !isBitOn(ATTR_VALUE)) {
       bitOn(TAG_CLOSE)
-    } else if (char === '>' && isBitOn(IN_TAG) && !isBitOn(ATTR_QUOTES)) {
+    } else if (char === '>' && isBitOn(IN_TAG) && !isBitOn(ATTR_QUOTE)) {
       if (!tagRest && !isBitOn(TAG_OPEN) && (rest || !isBitOn(TAG_CLOSE))) {
         sayOpentag()
       }
@@ -153,7 +164,7 @@ exports.parse = (xhtml, { opentag, closetag, attribute, text, comment, instructi
       bitOff(TAG_CLOSE)
     } else if (char === ' ' && isBitOn(IN_TAG) && !isBitOn(TAG_OPEN)) {
       sayOpentag()
-    } else if (char === ' ' && isBitOn(IN_TAG) && !isBitOn(ATTR_QUOTES) && (attrRest || rest)) {
+    } else if (char === ' ' && isBitOn(IN_TAG) && !isBitOn(ATTR_QUOTE) && (attrRest || rest)) {
       sayAttribute()
     } else if (char === '=' && isBitOn(IN_TAG) && !isBitOn(ATTR_VALUE)) {
       bitOn(ATTR_VALUE)

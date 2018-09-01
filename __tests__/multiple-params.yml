@@ -1,10 +1,11 @@
 name: multiple tag params
-xhtml: <input disabled type=text name=max/ value="!a> b/<!-- <c=d" autofocus/>
+xhtml: <input disabled type=text name=max/ value="!a> b/<!-- <c=d" form='main' autofocus/>
 expected:
   - opentag: input
   - attribute: [disabled, '${true}']
   - attribute: [type, text]
   - attribute: [name, max/]
   - attribute: [value, '!a> b/<!-- <c=d']
+  - attribute: [form, main]
   - attribute: [autofocus, '${true}']
   - closetag: ''
