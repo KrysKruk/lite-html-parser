@@ -28,3 +28,24 @@ parse('<p>Welcome <span>Mr</span> <strong>John</strong></p>', {
   instruction (instruction) { console.log({ instruction }) }
 })
 ```
+
+## API
+
+### Handlers
+
+Handler functions are called in the parsing process.
+
+All functions needs to be provided.
+
+- `opentag (name)`
+- `closetag (name)`
+- `attribute (name, value)`
+- `text (text)`
+- `comment (comment)`
+- `instruction (instruction)`
+
+### Options
+
+A third argument can be an object with options.
+
+- `noAttributeValue` - value to used when an attribute doesn't have a value (e.g. `<input enabled />`); by default `''` (empty string)

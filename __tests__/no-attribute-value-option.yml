@@ -1,0 +1,9 @@
+name: noAttributeValue option
+options:
+  noAttributeValue: true
+xhtml: <input disabled autofocus="" />
+expected:
+  - opentag: input
+  - attribute: [disabled, true]
+  - attribute: [autofocus, '']
+  - closetag: ''

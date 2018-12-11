@@ -13,13 +13,19 @@ const IN_STYLE = 1 << 10
 const SCRIPT_ENDING = ['<', '/', 's', 'c', 'r', 'i', 'p', 't', '>']
 const STYLE_ENDING = ['<', '/', 's', 't', 'y', 'l', 'e', '>']
 
+const OPTIONS = {
+  noAttributeValue: ''
+}
+
 let state = 0
 
 const bitOn = (bit) => { state |= bit }
 const bitOff = (bit) => { state = state & ~bit }
 const isBitOn = bit => (state & bit) > 0
 
-exports.parse = (xhtml, { opentag, closetag, attribute, text, comment, instruction }) => {
+exports.parse = (xhtml, handlers, options = OPTIONS) => {
+  const { opentag, closetag, attribute, text, comment, instruction } = handlers
+  const { noAttributeValue } = options
   let commentStep = 0
   let scriptStep = 0
   let styleStep = 0
@@ -40,7 +46,7 @@ exports.parse = (xhtml, { opentag, closetag, attribute, text, comment, instructi
   const sayAttribute = () => {
     if (!attrRest) {
       attrRest = rest
-      rest = '${true}' // eslint-disable-line no-template-curly-in-string
+      rest = noAttributeValue
     }
     attribute(attrRest, rest, line, row)
     attrRest = ''
