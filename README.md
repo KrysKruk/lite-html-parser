@@ -1,19 +1,23 @@
-# Not-So-Smart XHTML Parser
+# HTML Parser
 
-Covers less than 50% of the XHTML Specification, but is fast and supports 99% cases. Has no dependencies.
+Parses HTML text and calls callbacks on found elements.
+
+The given HTML doesn't have to be valid. It tries any string to be parsed.
+
+Zero dependencies. Create an issue if you found any HTML code parsed in a wrong way.
 
 See tests for examples.
 
 ## Installation
 
 ```
-npm i not-so-smart-xhtml-parser
+npm i lite-html-parser
 ```
 
 ## Usage
 
 ```js
-const { parse } = require('not-so-smart-xhtml-parser')
+const { parse } = require('lite-html-parser')
 
 parse('<p>Welcome <span>Mr</span> <strong>John</strong></p>', {
   opentag (name) { console.log({ opentag: name }) },
