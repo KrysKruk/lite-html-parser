@@ -5,10 +5,11 @@ const TAG_CLOSE = 1 << 3
 const ATTR_QUOTE = 1 << 4
 const ATTR_SINGLE_QUOTE = 1 << 5
 const ATTR_DOUBLE_QUOTE = 1 << 6
-const IN_INSTRUCTION = 1 << 7
-const IN_COMMENT = 1 << 8
-const IN_SCRIPT = 1 << 9
-const IN_STYLE = 1 << 10
+const ATTR_BRACE = 1 << 7
+const IN_INSTRUCTION = 1 << 8
+const IN_COMMENT = 1 << 9
+const IN_SCRIPT = 1 << 10
+const IN_STYLE = 1 << 11
 
 const SCRIPT_ENDING = ['<', '/', 's', 'c', 'r', 'i', 'p', 't', '>']
 const STYLE_ENDING = ['<', '/', 's', 't', 'y', 'l', 'e', '>']
@@ -151,6 +152,15 @@ exports.parse = (xhtml, handlers, options = OPTIONS) => {
     } else if (char === "'" && isBitOn(ATTR_VALUE) && !isBitOn(ATTR_QUOTE)) {
       bitOn(ATTR_SINGLE_QUOTE)
       bitOn(ATTR_QUOTE)
+    } else if (char === '}' && isBitOn(ATTR_BRACE)) {
+      bitOff(ATTR_BRACE)
+      bitOff(ATTR_QUOTE)
+      bitOff(ATTR_VALUE)
+      rest += char
+    } else if (char === '{' && isBitOn(ATTR_VALUE) && !isBitOn(ATTR_QUOTE)) {
+      bitOn(ATTR_BRACE)
+      bitOn(ATTR_QUOTE)
+      rest += char
     } else if (char === '/' && isBitOn(IN_TAG) && !isBitOn(ATTR_VALUE)) {
       bitOn(TAG_CLOSE)
     } else if (char === '>' && isBitOn(IN_TAG) && !isBitOn(ATTR_QUOTE)) {

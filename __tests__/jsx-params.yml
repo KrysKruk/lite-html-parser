@@ -1,0 +1,10 @@
+name: jsx tag params
+xhtml: '<input a={!a> b/<!-- <c=d} b={callMethod()} c={{ a: 1 }} d={call({ a: " b=2" })} e={1} />'
+expected:
+  - opentag: input
+  - attribute: [a, '{!a> b/<!-- <c=d}']
+  - attribute: [b, '{callMethod()}']
+  - attribute: [c, '{{ a: 1 }}']
+  - attribute: [d, '{call({ a: " b=2" })}']
+  - attribute: [e, '{1}']
+  - closetag: ''

@@ -1,13 +1,13 @@
 name: multi line tag
 xhtml: >-
   <div
-    x=${1}
+    x={1}
     data-ref="a1"
-    onClick="${context.test(refs.a1.props.x, props.y)}"
+    onClick="{context.test(refs.a1.props.x, props.y)}"
   />
 expected:
   - opentag: div
-  - attribute: [x, '${1}']
+  - attribute: [x, '{1}']
   - attribute: [data-ref, 'a1']
-  - attribute: [onClick, '${context.test(refs.a1.props.x, props.y)}']
+  - attribute: [onClick, '{context.test(refs.a1.props.x, props.y)}']
   - closetag: ''
