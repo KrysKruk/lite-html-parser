@@ -18,12 +18,6 @@ const OPTIONS = {
   noAttributeValue: ''
 }
 
-let state = 0
-
-const bitOn = (bit) => { state |= bit }
-const bitOff = (bit) => { state = state & ~bit }
-const isBitOn = bit => (state & bit) > 0
-
 exports.parse = (xhtml, handlers, options = OPTIONS) => {
   const { opentag, closetag, attribute, text, comment, instruction } = handlers
   const { noAttributeValue } = options
@@ -34,8 +28,13 @@ exports.parse = (xhtml, handlers, options = OPTIONS) => {
   let tagRest = ''
   let tagName = ''
   let rest = ''
+  let state = 0
   let line = 0
   let row = 0
+
+  const bitOn = (bit) => { state |= bit }
+  const bitOff = (bit) => { state = state & ~bit }
+  const isBitOn = bit => (state & bit) > 0
 
   const sayOpentag = () => {
     bitOn(TAG_OPEN)
@@ -202,6 +201,4 @@ exports.parse = (xhtml, handlers, options = OPTIONS) => {
   if (rest) {
     text(rest, line, row)
   }
-
-  state = 0
 }
